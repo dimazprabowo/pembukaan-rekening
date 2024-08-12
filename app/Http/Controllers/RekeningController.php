@@ -43,6 +43,7 @@ class RekeningController extends Controller
     public function store(RekeningRequest $request)
     {
         $data = $this->repo->store($request->all());
+        broadcast(new \App\Events\RekeningEvent());
         return response()->json($data);
     }
 
@@ -70,6 +71,7 @@ class RekeningController extends Controller
     {
         $id = $request->id;
         $data = $this->repo->update($request->all(), $id);
+        broadcast(new \App\Events\RekeningEvent());
         return response()->json($data);
     }
 

@@ -156,4 +156,14 @@
             $table.draw();
         });
     </script>
+
+    {{-- WEB SOCKET WITH PUSHER --}}
+    <script>
+        $(document).ready(function() {
+            Echo.channel(`rekening-channel`)
+                .listen('RekeningEvent', (e) => {
+                    $table.draw();
+                });
+        });
+    </script>
 @endpush

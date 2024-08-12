@@ -28,3 +28,7 @@ Route::resource('rekening', 'App\Http\Controllers\RekeningController');
 Route::get('/data-rekening', [\App\Http\Controllers\RekeningController::class, 'dataRekening'])->name('data-rekening');
 Route::post('/rekening-update', [\App\Http\Controllers\RekeningController::class, 'update'])->name('rekening.update');
 Route::post('/rekening-approve', [\App\Http\Controllers\RekeningController::class, 'approve'])->name('rekening.approve');
+
+// Route::get('/sender', function () {
+//     broadcast(new \App\Events\RekeningEvent());
+// });
