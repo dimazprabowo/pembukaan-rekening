@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container container-fluid">
-        <table class="table" id="tableRekening">
+        <table class="table w-100" id="tableRekening">
             <thead>
                 @if (session('role') != 'supervisor')
                     <div class="d-flex justify-content-end mt-3">
@@ -130,9 +130,9 @@
                     data: 'status',
                     render: function(data, type, row, meta) {
                         if (data == 'approved') {
-                            return '<span class="badge bg-success">Approved</span>';
+                            return '<span class="badge border border-success text-success bg-transparent">Approved</span>';
                         } else {
-                            return '<span class="badge bg-warning">Pending</span>';
+                            return '<span class="badge border border-warning text-warning bg-transparent">Pending</span>';
                         }
                     }
                 },
@@ -162,6 +162,7 @@
         $(document).ready(function() {
             Echo.channel(`rekening-channel`)
                 .listen('RekeningEvent', (e) => {
+                    console.log(e);
                     $table.draw();
                 });
         });

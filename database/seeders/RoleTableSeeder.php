@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Role;
 
 class RoleTableSeeder extends Seeder
 {
@@ -13,17 +13,19 @@ class RoleTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // Data role yang ingin dimasukkan atau diperbarui
         $arrayData = [
             'customer service',
             'supervisor',
         ];
+
+        // Loop melalui setiap role dan gunakan updateOrCreate
         foreach ($arrayData as $data) {
-            DB::table('role')->insert(
+            Role::updateOrCreate(
                 [
-                    'role_name' => $data,
+                    'role_name' => $data, // Menggunakan role_name sebagai identifier
                 ]
             );
         }
-
     }
 }

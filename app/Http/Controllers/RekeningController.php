@@ -25,6 +25,7 @@ class RekeningController extends Controller
 
     public function dataRekening(Request $request)
     {
+        // dd($request->all());
         $data = $this->repo->getAll($request->all());
         return response()->json($data);
     }
@@ -43,7 +44,11 @@ class RekeningController extends Controller
     public function store(RekeningRequest $request)
     {
         $data = $this->repo->store($request->all());
-        broadcast(new \App\Events\RekeningEvent());
+        try {
+            broadcast(new \App\Events\RekeningEvent());
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return response()->json($data);
     }
 
@@ -69,9 +74,12 @@ class RekeningController extends Controller
      */
     public function update(RekeningRequest $request)
     {
-        $id = $request->id;
-        $data = $this->repo->update($request->all(), $id);
-        broadcast(new \App\Events\RekeningEvent());
+        $data = $this->repo->update($request->all(), $request->id);
+        try {
+            broadcast(new \App\Events\RekeningEvent("update"));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return response()->json($data);
     }
 
@@ -86,6 +94,11 @@ class RekeningController extends Controller
     public function approve(Request $request)
     {
         $data = $this->repo->approve($request->id);
+        try {
+            broadcast(new \App\Events\RekeningEvent());
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return response()->json($data);
     }
 }

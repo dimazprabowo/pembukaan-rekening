@@ -17,9 +17,10 @@ class RekeningEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    protected $textTesting;
+    public function __construct($text = 'Rekening')
     {
-        //
+        $this->textTesting = $text;
     }
 
     /**
@@ -31,6 +32,13 @@ class RekeningEvent implements ShouldBroadcast
     {
         return [
             new Channel('rekening-channel'),
+        ];
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'text' => $this->textTesting
         ];
     }
 }

@@ -9,14 +9,16 @@ class Role extends Model
 {
     use HasFactory;
 
+    // Jika nama tabel tidak mengikuti konvensi plural
     protected $table = 'role';
-
-    protected $fillable = [
-        'role_name',
-    ];
+    
+    // Kolom yang dapat diisi
+    protected $fillable = ['role_name'];
 
     public function users()
     {
         return $this->hasMany(User::class);
     }
 }
+
+

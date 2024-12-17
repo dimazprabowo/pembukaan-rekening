@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\User;
 
 class UserTableSeeder extends Seeder
 {
@@ -16,20 +15,27 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert(
+        // Use updateOrCreate for the Supervisor
+        User::updateOrCreate(
             [
-                'role_id' => '2',
+                'email' => 'supervisor@localhost', // Use email as a unique identifier
+            ],
+            [
+                'role_id' => 2,
                 'name' => 'Supervisor',
-                'email' => 'supervisor@localhost',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password')
             ]
         );
-        DB::table('users')->insert(
+
+        // Use updateOrCreate for the Admin
+        User::updateOrCreate(
             [
-                'role_id' => '1',
+                'email' => 'admin@localhost', // Use email as a unique identifier
+            ],
+            [
+                'role_id' => 1,
                 'name' => 'Admin',
-                'email' => 'admin@localhost',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password')
             ]

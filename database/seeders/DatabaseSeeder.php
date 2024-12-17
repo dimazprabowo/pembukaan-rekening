@@ -14,15 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\Rekening::factory()->count(50)->create();
 
 
         $this->call([
             RoleTableSeeder::class,
-            UserTableSeeder::class
+            UserTableSeeder::class,
         ]);
     }
 }
